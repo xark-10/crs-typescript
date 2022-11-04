@@ -1,0 +1,71 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node server",
+    "dev": "cross-env NODE_ENV=development nodemon server",
+    "test": "cross-env NODE_ENV=test mocha --recursive --exit --timeout 10000"
+  },
+  "engines": {
+    "node": "16.13.2"
+  },
+  "keywords": [],
+  "author": ",mukundan",
+  "license": "MIT",
+  "dependencies": {
+    "add": "^2.0.6",
+    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
+    "cloudinary": "^1.28.1",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "deep-email-validator": "^0.1.21",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.12.1",
+    "jsonwebtoken": "^8.5.1",
+    "log4js": "^6.3.0",
+    "logger": "^0.0.1",
+    "mocha": "^9.0.3",
+    "moment": "^2.29.1",
+    "mongoose": "^5.13.2",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.4",
+    "node": "^16.6.1",
+    "nodemon": "^2.0.12",
+    "password-validator": "^5.1.1",
+    "redis": "^3.1.2",
+    "run": "^1.4.0",
+    "stripe": "^8.211.0",
+    "stripe-event-types": "^1.0.2",
+    "supertest": "^6.1.5",
+    "swagger-jsdoc": "^6.2.1",
+    "swagger-ui": "^4.13.0",
+    "swagger-ui-express": "^4.5.0",
+    "test": "^0.6.0",
+    "validator": "^13.6.0",
+    "winston": "^3.3.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "bugs": {
+    "url": "https://github.com/xark-10/Jatayu"
+  },
+  "homepage": "",
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/jsonwebtoken": "^8.5.9",
+    "@types/logger": "0.0.1",
+    "@types/multer": "^1.4.7",
+    "@types/redis": "^4.0.11",
+    "@types/stripe": "^8.0.417",
+    "@types/swagger-jsdoc": "^6.0.1",
+    "@types/swagger-ui-express": "^4.1.3"
+  }
+}
