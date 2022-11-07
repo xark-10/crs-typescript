@@ -6,7 +6,7 @@ import authActions from '../controllers/authController'
 import hotelActions from '../controllers/hotelController'
 import bookingController from '../controllers/bookingController'
 import findActions from '../controllers/findActions'
-import imageActions from '../controllers/imageController'
+//import imageActions from '../controllers/imageController'
 import auth from "../middleware/auth";
 import paymentActions from '../controllers/paymentController'
 import multer from 'multer';
@@ -518,13 +518,14 @@ router.post("/pay", paymentActions.payRoute)
  * @route POST /uploadProfile
  */
 
+/*
 router.post(
     '/uploadProfile',
     auth,
     uploads.single('profile'),
     imageActions.profileImageUpload
   );
-
+*/
 
 
 
@@ -538,4 +539,4 @@ app.listen(8000,()=>{
   console.log("swagger docs port listening in port 8000");
 })
 
-
+export default router;

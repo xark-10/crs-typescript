@@ -22,4 +22,4 @@ function close(){
   return mongoose.disconnect();
 
 }
-module.exports = {connectDB,close};
+export default {connectDB,close};

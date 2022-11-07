@@ -256,6 +256,7 @@ const authActions = {
         })
         //creates new access token
         const accessToken:string = jwt.sign(
+          // @ts-ignore
           { user_id: User._id, username },
           process.env.ACCESS_TOKEN_KEY!,
           {

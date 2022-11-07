@@ -1,15 +1,15 @@
-const express = require('express');
-const morgan = require('morgan');
-const connect = require('./database/databaseConnection');
-const cors = require('cors');
-const routes = require('./routes/index');
+import express from 'express';
+import morgan from 'morgan';
+import connect from './database/databaseConnection';
+import cors from 'cors';
+import routes from './routes/index';
 require("dotenv").config();
-const logger = require('./config/logger.js')
+import logger from './config/logger.js';
+import {Request, Response, Application} from 'express';
 
 
 
-
-const app = express();
+const app: Application = express();
 
 // HTTP request logger middleware for node.js
 if (process.env.NODE_ENV === "development") {
@@ -40,7 +40,7 @@ app.use(routes);
  */
 
 if(process.env.NODE_ENV === "test"){
-  app.listen(process.env.PORT_TEST, function (req, res) {
+  app.listen(process.env.PORT_TEST, function (req?:Request, res?:Response) {
     logger.log('info',
       `Server started at port ${process.env.PORT_TEST} and running in ${process.env.NODE_ENV} environment.`
     );
@@ -48,7 +48,7 @@ if(process.env.NODE_ENV === "test"){
 }
 // Development and Production Port
 else{
-  app.listen(process.env.PORT, function (req, res) {
+  app.listen(process.env.PORT, function (req?:Request, res?:Response) {
     logger.log('info',
       `Server started at port ${process.env.PORT} and running in ${process.env.NODE_ENV} environment.`
     );
@@ -56,4 +56,4 @@ else{
 }
 
 
-module.exports = app
+export default  app;

@@ -4,7 +4,9 @@ import Cloudinary from '../database/cloudinaryConfig';
 
 
 const imageActions = {
+    /*
     profileImageUpload: async function (req:any, res:any) {
+    
         try {
             console.log(req.body)
             if (
@@ -56,5 +58,6 @@ const imageActions = {
         }
 
     }
+    */
 }
 export default imageActions

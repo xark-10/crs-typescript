@@ -21,3 +21,7 @@ declare module 'stripe' {
   class Bar extends Foo {
     method() {}
   }
+
+declare module "morgan"
+
+declare module "cors"

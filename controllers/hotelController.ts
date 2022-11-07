@@ -258,7 +258,7 @@ const authActions = {
           number:number,
           maxGuests:maxGuests
         })
-
+        // @ts-ignore
         newRoom.hotel = hotel._id;
 
         newRoom.save(function (err:any) {
