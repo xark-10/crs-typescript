@@ -12,3 +12,12 @@ declare module 'stripe' {
     }
   }
   declare module "redis";
+
+  class Foo {
+    /** @internal */
+    method() {}
+  }
+  
+  class Bar extends Foo {
+    method() {}
+  }

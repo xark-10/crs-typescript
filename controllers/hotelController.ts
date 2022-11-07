@@ -12,6 +12,9 @@ import emailValidator from '../validator/emailValidator';
 import redisClient from '../database/redisConnection'
 import { decode } from 'punycode';
 import { log } from 'console'
+import {
+  Model, Schema, model, Document
+} from 'mongoose';
 
 
 // Authentication Controller Commands:
@@ -21,7 +24,8 @@ const authActions = {
     try {
       const { username, password, verifyPassword, description, address, star_rating, phoneNumber,city ,town ,hotelName,couple,single,superDeluxe,deluxe,luxury,image} = req.body
       // Email and Password Validator
-      const { valid, reason, validators } = await emailValidator(username)
+      //const { valid, reason, validators } = await emailValidator(username)
+      const valid:any = await emailValidator(username)
       const isPasswordValid:any = passwordSchema.validate(password)
 
       // To check if all the required fields are provided
@@ -36,7 +40,7 @@ const authActions = {
         return res.status(httpStatusCode.CONFLICT).send({
           success: false,
           message: authStringConstant.INVALID_EMAIL,
-          reason: validators[reason].reason
+          //reason: validators[reason].reason
         });
       }
       //  If the password doesn't meet the conditions returns error message
@@ -54,7 +58,7 @@ const authActions = {
         });
       }
       // Perform - Registering a Customer
-      else if (valid & isPasswordValid & (password === verifyPassword)) {
+      else if (valid && isPasswordValid && (password === verifyPassword)) {
 
         // check if user already exist
         const oldUser = await Hotel.findOne({ username })
@@ -239,7 +243,7 @@ const authActions = {
       const username = decodedAccessToken.username
 
 
-      const hotel = await Hotel.findOne({ username });
+      const hotel:any = await Hotel.findOne({ username });
 
       if (!hotel) {
         res.status(httpStatusCode.UNAUTHORIZED).send({

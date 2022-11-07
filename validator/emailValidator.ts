@@ -2,7 +2,6 @@
 
 import Validate from 'deep-email-validator';
 
-
 async function isEmailValid(email: string) {
     await Validate ({
         email: email,

@@ -10,16 +10,17 @@ import emailValidator from '../validator/emailValidator';
 import redisClient from '../database/redisConnection'
 import { decode } from 'punycode';
 import StringConstant from '../constants/strings';
-
+import { Request, Response } from 'express';
 // Authentication Controller Commands:
 const authActions = {
   // Registration function:
-  registerNewCustomer: async function (req:any, res:any) {
+  registerNewCustomer: async function (req:Request, res:Response) {
     try {
       
       const { username, password, verifyPassword, firstName, lastName, } = req.body
       // Email and Password Validator
-      const { valid, reason, validators } = await emailValidator(username)
+      //const { valid, reason, validators } = await emailValidator(username)
+      const valid:any = await emailValidator(username)
       const isPasswordValid:any = passwordSchema.validate(password)
 
       // To check if all the required fields are provided
@@ -34,7 +35,7 @@ const authActions = {
         return res.status(httpStatusCode.CONFLICT).send({
           success: false,
           message: authStringConstant.INVALID_EMAIL,
-          reason: validators[reason].reason
+          //reason: validators[reason].reason
         });
       }
       //  If the password doesn't meet the conditions returns error message
@@ -52,7 +53,7 @@ const authActions = {
         });
       }
       // Perform - Registering a Customer
-      else if (valid & isPasswordValid & (password === verifyPassword)) {
+      else if (valid && isPasswordValid && (password === verifyPassword)) {
 
         // check if user already exist
         const oldUser = await User.findOne({ username })
@@ -130,7 +131,7 @@ const authActions = {
   }, // Register logic ends here
 
   // Login existing customer
-  loginExistingCustomer: async function (req:any, res:any) {
+  loginExistingCustomer: async function (req:Request, res:Response) {
     try {
       //Get user input
       const { username, password } = req.body;
@@ -202,7 +203,7 @@ const authActions = {
 
 
   // Ping route
-  pingRoute: function (req:any, res:any) {
+  pingRoute: function (req:Request, res:Response) {
     res.status(httpStatusCode.OK).send({
       success: true,
       message: StringConstant.SUCCESSFUL_PING,
@@ -210,7 +211,7 @@ const authActions = {
   },
 
   // Home route
-  homePageRoute: function (req:any, res:any) {
+  homePageRoute: function (req:Request, res:any) {
     res.status(httpStatusCode.OK).send({
       success: true,
       message: StringConstant.SUCCESSFUL_HOME,
@@ -218,7 +219,7 @@ const authActions = {
   },
 
   // To renew a new accessToken
-  renewAccessToken: async function (req:any, res:any) {
+  renewAccessToken: async function (req:Request, res:Response) {
     //checks the environment and collects the data accordingly
     if (
       process.env.NODE_ENV === "development" ||
@@ -226,7 +227,7 @@ const authActions = {
     ) {
       var refreshToken = req.body.refreshToken;
     } else {
-      var refreshToken = req.query.refreshToken;
+      var refreshToken:any = req.query.refreshToken;
     }
     if (!refreshToken) {
       //Token not found!
@@ -254,7 +255,7 @@ const authActions = {
 
         })
         //creates new access token
-        const accessToken = jwt.sign(
+        const accessToken:string = jwt.sign(
           { user_id: User._id, username },
           process.env.ACCESS_TOKEN_KEY!,
           {
@@ -291,7 +292,7 @@ const authActions = {
   },
 
   // To logout an existing customer.
-  logoutUser: async function (req:any, res:any) {
+  logoutUser: async function (req:Request, res:Response) {
     try {
       // //checks the environment and collects the data accordingly
       if (
@@ -300,7 +301,7 @@ const authActions = {
       ) {
         var accessToken = req.body.accessToken;
       } else {
-        var accessToken = req.query.accessToken;
+        var accessToken:any = req.query.accessToken;
       }
       //decode the payload
       interface JwtPayload {
@@ -333,7 +334,7 @@ const authActions = {
   },
 
   // Unidentified route
-  errorPageRoute: function (req:any, res:any) {
+  errorPageRoute: function (req:Request, res:any) {
     res.status(httpStatusCode.NOT_FOUND).json({
       success: "false",
       message: StringConstant.PAGE_NOT_FOUND

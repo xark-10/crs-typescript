@@ -5,6 +5,10 @@
 import mongoose from "mongoose"
 import { Logger } from "logger"
 import bcrypt from 'bcrypt'
+import { Request, Response } from 'express';
+import {
+  Model, Schema, model, Document
+} from 'mongoose';
 require('dotenv').config()
 const saltValue = 12
 
@@ -47,6 +51,9 @@ const saltValue = 12
       },
       avatar: {
         type: String,
+      },
+      _id: {
+        type: String,
       }
     },
     { collection: "Users" }
@@ -55,6 +62,7 @@ const saltValue = 12
     email: string;
     password: string;
     name: string;
+    _id: string;
   }
 
 userSchema.pre('save', function (next) {

@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/user';
-import cloudinary from '../database/cloudinaryConfig';
+import Cloudinary from '../database/cloudinaryConfig';
 
 
 const imageActions = {
@@ -30,7 +30,7 @@ const imageActions = {
                     .json({ success: false, message: 'unauthorized access!' });
 
             try {
-                const result = await cloudinary.uploader.upload(req.file.path, {
+               const result = await Cloudinary.uploader.upload(req.file.path, {
                     public_id: `${user._id}_profile`,
                     width: 500,
                     height: 500,
