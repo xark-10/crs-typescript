@@ -36,7 +36,7 @@ const swaggerOptions={
           servers:["http://localhost:3000"]
       }
   },
-  apis:["./routes/*.js"]
+  apis:["./routes/*.ts"]
 }
 const swaggerDocs=swaggerJSDoc(swaggerOptions);
 app.use('/api-docs',swaggerUI.serve,swaggerUI.setup(swaggerDocs));
