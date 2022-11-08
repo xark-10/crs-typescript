@@ -3,8 +3,8 @@ import morgan from 'morgan';
 import connect from './database/databaseConnection';
 import cors from 'cors';
 import routes from './routes/index';
-require("dotenv").config();
-import logger from './config/logger.js';
+import dotenv from 'dotenv';
+import logger from './config/logger';
 import {Request, Response, Application} from 'express';
 
 

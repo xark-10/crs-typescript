@@ -4,7 +4,7 @@ import dotenv from 'dotenv'
 // DEV Environment Connection
 //if(process.env.NODE_ENV ==='development'){
   const databaseConfig = {
-    secret: `${process.env.MONGODB_DEV_SECRET}`,
+    secret: `${process.env.SECRET}`,
     databaseURL: `mongodb+srv://${process.env.MONGODB_DEV_USERNAME}:${process.env.MONGODB_DEV_PASSWORD}@${process.env.MONGODB_DEV_CLUSTER_NAME}.${process.env.MONGODB_DEV_DB_IDENTIFIER}.mongodb.net/${process.env.MONGODB_DEV_DB_NAME}?retryWrites=true&w=majority`,
   };
 
@@ -24,5 +24,5 @@ else if(process.env.NODE_ENV ==='production'){
   };
 }
 */
-export default databaseConfig
+export default databaseConfig;
 

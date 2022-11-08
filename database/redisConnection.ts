@@ -1,5 +1,5 @@
 import  redis from 'redis'
-require("dotenv").config();
+import dotenv from 'dotenv';
 
 
 //connection to redis 

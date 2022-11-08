@@ -5,7 +5,7 @@ import Booking from '../models/booking'
 import httpStatusCode from '../constants/httpStatusCodes';
 import authStringConstant from '../constants/strings'
 import moment from 'moment'
-import env from 'dotenv'
+import dotenv from 'dotenv'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET!, {
     apiVersion: '2020-08-27',
