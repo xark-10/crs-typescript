@@ -6,13 +6,14 @@ import httpStatusCode from '../constants/httpStatusCodes';
 import authStringConstant from '../constants/strings'
 import moment from 'moment'
 import dotenv from 'dotenv'
+import {Request, Response, Application} from 'express';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET!, {
     apiVersion: '2020-08-27',
   });
 
 const stripePayment = {
-    payRoute: async function (req:any, res:any) {
+    payRoute: async function (req:Request, res:Response) {
         try {
             const { email, hotel_id, check_in, type, price} = req.body;
             const hotel = await Hotel.findOne({ _id: hotel_id })
@@ -40,7 +41,7 @@ const stripePayment = {
             }
             const checkInDateFormat = moment(new Date(check_in)).format('YYYY-MM-DD');
             const checkInDate = new Date(checkInDateFormat)
-            if (!email) return res.status(400).json({ message: "Please enter a valid email" });
+            //if (!email) return res.status(400).json({ message: "Please enter a valid email" });
             Booking.find({ hotel: hotel._id, "check_out": { $gte: checkInDate } },async function (err:any, foundBookings:any) {
                 if (foundBookings.length === 0 || foundBookings.length < categoryCount) {
                     const paymentIntent = await stripe.paymentIntents.create({
@@ -68,7 +69,7 @@ const stripePayment = {
             });
         }
     },
-    stripeRoute: async function (req:any, res:any) {
+    stripeRoute: async function (req:Request, res:Response) {
         const sig = req.headers["stripe-signature"];
         let event;
         try {
